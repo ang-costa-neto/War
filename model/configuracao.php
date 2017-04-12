@@ -1,13 +1,10 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: angel
- * Date: 12/04/2017
- * Time: 15:40
- */
-class configuracao
+class Configuracao
 {
+    /*
+     * As configurações do pais
+     */
     public function configuracaoPais(){
         //array de pais com suas fronteiras
 
@@ -65,5 +62,8 @@ class configuracao
             "pais" => "China",
             "fronteiras" => array("Russia")
         );
+
+        //Retorna um array com os paises para o sorteio do usuario
+        return $array_paises = array($africa_sul, $alemanha, $argentina, $brasil, $china, $egito, $eua, $franca, $mexico, $reino_unido, $russia);
     }
 }
