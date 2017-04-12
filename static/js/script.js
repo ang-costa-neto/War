@@ -1,3 +1,5 @@
-/**
- * Created by angel on 10/04/2017.
- */
+function getNome(){
+    var name = $('#name').val();
+
+
+}
