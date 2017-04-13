@@ -9,7 +9,10 @@ class Jogo extends Configuracao
 
         //Adiciona os paises sorteados ao usuario
         $_SESSION['paises'] = array();
-
         
+    }
+
+    public function encerrarJogo(){
+
     }
 }

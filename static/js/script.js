@@ -1,15 +1,17 @@
 function telaInicial(){
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET','view/login.html');
-	xhr.onload = function(){
-		if(xhr.readyState === 4){
-			document.getElementById('conteudo').innerHTML = xhr.responseText;
-		}
-	}
-	xhr.send(null);
+
+	$.get('view/login.html',function(data){
+	   $('#conteudo').html(data)
+    });
+
 }
 
 function realizarLogin(){
     var name = $('#name').val();
+
+   $.post('controller/iniciarJogo.php',{"nome":name},function(data){
+       console.log(data);
+   })
+
 	
 }
