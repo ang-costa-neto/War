@@ -1,7 +1,20 @@
 $(function(){
     $('#paises_jogador').on('change',function(){
-       $.post('http://localhost/chuvawar/actions/CarregarAlvos.php',{'pais':$('#paises_jogador').val()},function(data){
-            console.log(data);
-       });
+        var pais_selecionado = $('#paises_jogador').val();
+        console.log(pais_selecionado);
+        if(pais_selecionado !== ''){
+           $.post('http://localhost/chuvawar/actions/CarregarAlvos.php',{'pais':pais_selecionado},function(data){
+               if(data != 1){
+                   $('#select_pais_alvo').empty();
+                   $('#select_pais_alvo').html(data);
+                   $('.selectpicker').selectpicker({});
+               }else{
+                   $('#select_pais_alvo').empty();
+                   $('#select_pais_alvo').html('<strong>Os paises na fronteira estão em seu time</strong>');
+               }
+           });
+        }else{
+            $('#select_pais_alvo').empty();
+        }
     });
 });

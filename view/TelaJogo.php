@@ -48,17 +48,22 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <select class="selectpicker" id="paises_jogador">
             <option value="">Selecione um País</option>
             <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
-                <option value="<?= $_SESSION['paises_jogador'][$i]['pais'] ?>"><?= $_SESSION['paises_jogador'][$i]['pais'] ?></option>
+                <option value="<?= $i ?>"><?= $_SESSION['paises_jogador'][$i]['pais'] ?></option>
             <?php } ?>
         </select>
-
+        <br><br>
+        <button class="btn btn-danger disabled">Atacar</button>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <div id="select_pais_alvo">
+
+        </div>
 
     </div>
 </div>
+
 <?php require_once ('../static/shared/footer.php'); ?>

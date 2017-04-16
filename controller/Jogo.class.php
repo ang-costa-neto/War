@@ -37,5 +37,9 @@ class Jogo extends Configuracao
 
     }
 
+    public function rodaDado(){
+        return rand(0,10);
+    }
+
 
 }
