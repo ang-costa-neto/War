@@ -100,7 +100,7 @@ class Configuracao
         );
 
         $russia = array(
-            "pais" => "Alemanha",
+            "pais" => "Russia",
             "fronteiras" => array("Alemanha", "China", "EUA"),
             "exercito" => 3
         );

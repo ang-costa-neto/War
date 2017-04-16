@@ -12,3 +12,7 @@
     <link rel="stylesheet" href="<?= SERVER.DIRECTORY_ROOT ?>static/css/bootstrap-select.min.css">
 </head>
 <body>
+<div class="container">
+    <h1 align="center">ChuWar</h1>
+    <div class="row">
+        <div id="conteudo">

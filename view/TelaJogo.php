@@ -11,39 +11,54 @@
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
 
 ?>
-<div class="col-md-6">
-    <table class="table table-hover">
-        <tr>
-            <th><?= $_SESSION['usuario'] ?></th>
-        </tr>
-        <tr>
-            <th>Pais</th>
-            <th>Exercito</th>
-        </tr>
-        <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
-            <tr>
-                <td><?= $_SESSION['paises_jogador'][$i]['pais'] ?></td>
-                <td><?= $_SESSION['paises_jogador'][$i]['exercito'] ?></td>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <tr class="info" align="center">
+                <th colspan="2"><?= $_SESSION['usuario'] ?></th>
             </tr>
-        <?php } ?>
-    </table>
-</div>
-<div class="col-md-6">
-    <table class="table table-hover">
-        <tr>
-            <th>PC</th>
-        </tr>
-        <tr>
-            <th>Pais</th>
-            <th>Exercito</th>
-        </tr>
-        <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
             <tr>
-                <td><?= $_SESSION['paises_pc'][$i]['pais'] ?></td>
-                <td><?= $_SESSION['paises_pc'][$i]['exercito'] ?></td>
+                <th>Pais</th>
+                <th>Exercito</th>
             </tr>
-        <?php } ?>
-    </table>
+            <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
+                <tr>
+                    <td><?= $_SESSION['paises_jogador'][$i]['pais'] ?></td>
+                    <td><?= $_SESSION['paises_jogador'][$i]['exercito'] ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <tr class="danger">
+                <th colspan="2">PC</th>
+            </tr>
+            <tr>
+                <th>Pais</th>
+                <th>Exercito</th>
+            </tr>
+            <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
+                <tr>
+                    <td><?= $_SESSION['paises_pc'][$i]['pais'] ?></td>
+                    <td><?= $_SESSION['paises_pc'][$i]['exercito'] ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <select class="selectpicker" id="paises_jogador">
+            <option value="">Selecione um País</option>
+            <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
+                <option value="<?= $_SESSION['paises_jogador'][$i]['pais'] ?>"><?= $_SESSION['paises_jogador'][$i]['pais'] ?></option>
+            <?php } ?>
+        </select>
 
+    </div>
+    <div class="col-md-4">
+
+    </div>
+</div>
 <?php require_once ('../static/shared/footer.php'); ?>
