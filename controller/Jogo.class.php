@@ -26,17 +26,16 @@ class Jogo extends Configuracao
 
         shuffle($array_paises);
 
-        $_SESSION['paises_jogador'] = array();
-        $_SESSION['paises_pc'] = array();
 
         while ($contador < 6){
-            array_push($_SESSION['paises_jogador'],$array_paises);
+            $_SESSION['paises_jogador'][$contador] = $array_paises[$contador];
+            unset($array_paises[$contador]);
             $contador++;
         }
 
-        //$array = array_diff($array_paises,$_SESSION['paises_jogador']);
-
-        //sizeof($array);
+        $_SESSION['paises_pc'] = array_values($array_paises);
 
     }
+
+
 }

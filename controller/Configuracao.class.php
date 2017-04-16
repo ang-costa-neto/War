@@ -41,57 +41,74 @@ class Configuracao
         //array de pais com suas fronteiras
         $brasil = array(
             "pais" => "Brasil",
-            "fronteira" => array("Argentina", "Colombia", "Egito")
+            "fronteira" => array("Argentina", "Colombia", "Egito"),
+            "exercito" => 3
         );
 
         $argentina = array (
             "pais" => "Argentina",
-            "fronteira" => array("Brasil", "Colombia")
+            "fronteira" => array("Brasil", "Colombia"),
+            "exercito" => 3
+        );
+
+        $colombia = array (
+            "pais" => "Colombia",
+            "fronteira" => array("Brasil", "Mexico"),
+            "exercito" => 3
         );
 
         $mexico = array(
             "pais" => "Mexico",
-            "fronteiras" => array("Colombia", "EUA")
+            "fronteiras" => array("Colombia", "EUA"),
+            "exercito" => 3
         );
 
         $eua = array(
             "pais" => "EUA",
-            "fronteiras" => array("Mexico", "Russia","Reino Unido")
+            "fronteiras" => array("Mexico", "Russia","Reino Unido"),
+            "exercito" => 3
         );
 
         $reino_unido = array(
             "pais" => "Reino Unido",
-            "fronteiras" => array("EUA", "Franca","Alemanha")
+            "fronteiras" => array("EUA", "Franca","Alemanha"),
+            "exercito" => 3
         );
 
         $franca  = array(
             "pais" => "Franca",
-            "fronteiras" => array("Alemanha", "Reino Unido", "Egito")
+            "fronteiras" => array("Alemanha", "Reino Unido", "Egito"),
+            "exercito" => 3
         );
 
         $alemanha = array(
             "pais" => "Alemanha",
-            "fronteiras" => array("Franca", "Reino Unido", "Egito", "Russia")
+            "fronteiras" => array("Franca", "Reino Unido", "Egito", "Russia"),
+            "exercito" => 3
         );
 
         $egito = array(
             "pais" => "Egito",
-            "fronteiras" => array("Franca", "Alemanha", "Brasil", "Africa do Sul")
+            "fronteiras" => array("Franca", "Alemanha", "Brasil", "Africa do Sul"),
+            "exercito" => 3
         );
 
         $africa_sul = array(
             "pais" => "Africa do Sul",
-            "fronteiras" => array("Egito")
+            "fronteiras" => array("Egito"),
+            "exercito" => 3
         );
 
         $russia = array(
             "pais" => "Alemanha",
-            "fronteiras" => array("Alemanha", "China", "EUA")
+            "fronteiras" => array("Alemanha", "China", "EUA"),
+            "exercito" => 3
         );
 
         $china = array(
             "pais" => "China",
-            "fronteiras" => array("Russia")
+            "fronteiras" => array("Russia"),
+            "exercito" => 3
         );
 
         //Retorna um array com os paises para o sorteio do usuario
@@ -100,6 +117,7 @@ class Configuracao
             $alemanha,
             $argentina,
             $brasil,
+            $colombia,
             $china,
             $egito,
             $eua,
