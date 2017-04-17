@@ -4,7 +4,8 @@ $(function(){
         console.log(pais_selecionado);
         if(pais_selecionado !== ''){
            $.post('http://localhost/chuvawar/actions/CarregarAlvos.php',{'pais':pais_selecionado},function(data){
-               if(data != 1){
+               console.log(data);
+               if(data !== 0){
                    $('#select_pais_alvo').empty();
                    $('#select_pais_alvo').html(data);
                    $('.selectpicker').selectpicker({});
