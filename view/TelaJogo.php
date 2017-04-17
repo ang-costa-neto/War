@@ -10,6 +10,9 @@
     $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
 
+    var_dump(sizeof($_SESSION['paises_jogador']));
+    var_dump(sizeof($_SESSION['paises_pc']));
+
 ?>
 <div class="row">
     <div class="col-md-6">
@@ -38,7 +41,7 @@
                 <th>Pais</th>
                 <th>Exercito</th>
             </tr>
-            <?php for($i = 0; $i < $tamanho_pais_jogador; $i++){ ?>
+            <?php for($i = 0; $i < $tamanho_pais_pc; $i++){ ?>
                 <tr>
                     <td><?= $_SESSION['paises_pc'][$i]['pais'] ?></td>
                     <td><?= $_SESSION['paises_pc'][$i]['exercito'] ?></td>
@@ -56,13 +59,18 @@
             <?php } ?>
         </select>
         <br><br>
-        <button class="btn btn-danger disabled">Atacar</button>
+        <button id="atacar" class="btn btn-danger disabled">Atacar</button>
     </div>
     <div class="col-md-3">
         <div id="select_pais_alvo">
 
         </div>
 
+    </div>
+    <div class="col-md-6">
+        <pre>
+            <?= var_dump($_SESSION) ?>
+        </pre>
     </div>
 </div>
 
