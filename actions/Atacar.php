@@ -27,6 +27,8 @@
      * Partida do jogador
      */
 
+$_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': <b>Rodada do Jogador</b></p>';
+
     while($contador < $exercito){
         $dado = $jogo->rodaDado();
         $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': Valor no dado foi '.$dado.'</p>';
@@ -38,7 +40,7 @@
 
             $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_pc'][$alvo]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_pc'][$alvo]['exercito'].'</p>';
 
-            if( $_SESSION['paises_pc'][$alvo]['exercito'] == 0){
+            if( $_SESSION['paises_pc'][$alvo]['exercito'] <= 0){
 
                 $_SESSION['paises_jogador'][$pais_jogador]['exercito']--;
 
@@ -55,7 +57,7 @@
 
             $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_jogador'][$pais_jogador]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_jogador'][$pais_jogador]['exercito'].'</p>';
 
-            if($_SESSION['paises_jogador'][$pais_jogador]['exercito'] == 0){
+            if($_SESSION['paises_jogador'][$pais_jogador]['exercito'] <= 0){
 
                 $_SESSION['paises_pc'][$alvo]['exercito']--;
 
@@ -82,34 +84,186 @@
     $possibilidade_ataque = array();
     $contador = 0;
 
+    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': <b>Rodada do Computador</b></p>';
+
+    //Preenche um array de possibilidade de ataque
     for($i = 0; $i < $tamanho_pais_pc; $i++){
         $tamanho_pais_pc_fronteira = sizeof($_SESSION['paises_pc'][$i]['fronteira']);
         for($j = 0; $j < $tamanho_pais_jogador; $j++){
             for($k = 0; $k < $tamanho_pais_pc_fronteira; $k++) {
                 if($_SESSION['paises_pc'][$i]['fronteira'][$k] == $_SESSION['paises_jogador'][$j]['pais']){
-                    if ($_SESSION['paises_pc'][$i]['exercito'] > $_SESSION['paises_jogador'][$j]['exercito']){
+                    if($_SESSION['paises_pc'][$i]['exercito'] > $_SESSION['paises_jogador'][$j]['exercito']){
 
+                        $possibilidade_ataque[$contador]['pais_ataque_id'] = $i;
                         $possibilidade_ataque[$contador]['pais_ataque'] = $_SESSION['paises_pc'][$i]['pais'];
-
                         $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_pc'][$i]['exercito'];
-
+                        $possibilidade_ataque[$contador]['pais_alvo_id'] = $j;
                         $possibilidade_ataque[$contador]['pais_alvo'] = $_SESSION['paises_jogador'][$j]['pais'];
-
-                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
+                        $possibilidade_ataque[$contador]['pais_alvo_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
 
                     }else if($_SESSION['paises_pc'][$i]['exercito'] == $_SESSION['paises_jogador'][$j]['exercito']){
 
+                        $possibilidade_ataque[$contador]['pais_ataque_id'] = $i;
                         $possibilidade_ataque[$contador]['pais_ataque'] = $_SESSION['paises_pc'][$i]['pais'];
-
                         $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_pc'][$i]['exercito'];
-
+                        $possibilidade_ataque[$contador]['pais_alvo_id'] = $j;
                         $possibilidade_ataque[$contador]['pais_alvo'] = $_SESSION['paises_jogador'][$j]['pais'];
+                        $possibilidade_ataque[$contador]['pais_alvo_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
 
-                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
                     }
-                    $contador++;
                 }
             }
         }
     }
+
+
+    $tamanho_possibilidade_ataque = sizeof($possibilidade_ataque);
+    $contador = 0;
+
+    //Analisa as possibilidades de ataque
+    for($i = 0; $i < $tamanho_possibilidade_ataque; $i++){
+        if($possibilidade_ataque[$i]['pais_ataque_exercito'] > ($possibilidade_ataque[$i]['pais_alvo_exercito']/2)){
+
+            while($contador < $possibilidade_ataque[$i]['pais_ataque_exercito']){
+                $dado = $jogo->rodaDado();
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': Valor no dado foi '.$dado.'</p>';
+
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' ataca '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                if($dado > 5){
+                    $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'].'</p>';
+
+                    if( $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' dominou '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_pc'],$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        unset($_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        $_SESSION['paises_jogador'] = array_values($_SESSION['paises_jogador']);
+                        $_SESSION['paises_pc'][key(array_slice($_SESSION['paises_pc'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }else{
+                    $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'].'</p>';
+
+                    if($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' dominou '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_jogador'],$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        unset($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        $_SESSION['paises_pc'] = array_values($_SESSION['paises_pc']);
+                        $_SESSION['paises_jogador'][key(array_slice($_SESSION['paises_jogador'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }
+                $contador++;
+            }
+            break;
+
+        }else if ($possibilidade_ataque[$i]['pais_ataque_exercito'] > $possibilidade_ataque[$i]['pais_alvo_exercito']){
+
+            while($contador < $possibilidade_ataque[$i]['pais_ataque_exercito']){
+                $dado = $jogo->rodaDado();
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': Valor no dado foi '.$dado.'</p>';
+
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' ataca '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                if($dado > 5){
+                    $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'].'</p>';
+
+                    if( $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' dominou '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_pc'],$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        unset($_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        $_SESSION['paises_jogador'] = array_values($_SESSION['paises_jogador']);
+                        $_SESSION['paises_pc'][key(array_slice($_SESSION['paises_pc'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }else{
+                    $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'].'</p>';
+
+                    if($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' dominou '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_jogador'],$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        unset($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        $_SESSION['paises_pc'] = array_values($_SESSION['paises_pc']);
+                        $_SESSION['paises_jogador'][key(array_slice($_SESSION['paises_jogador'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }
+                $contador++;
+            }
+            break;
+
+        }else if ($possibilidade_ataque[$i]['pais_ataque_exercito'] == $possibilidade_ataque[$i]['pais_alvo_exercito']){
+
+            while($contador < $possibilidade_ataque[$i]['pais_ataque_exercito']){
+                $dado = $jogo->rodaDado();
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': Valor no dado foi '.$dado.'</p>';
+
+                $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' ataca '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                if($dado > 5){
+                    $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'].'</p>';
+
+                    if( $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' dominou '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_pc'],$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        unset($_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]);
+                        $_SESSION['paises_jogador'] = array_values($_SESSION['paises_jogador']);
+                        $_SESSION['paises_pc'][key(array_slice($_SESSION['paises_pc'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }else{
+                    $_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito']--;
+
+                    $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].' perdeu 1 exercito, resta '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'].'</p>';
+
+                    if($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['exercito'] <= 0){
+
+                        $_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['exercito']--;
+
+                        $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_jogador'][$possibilidade_ataque[$i]['pais_alvo_id']]['pais'].' dominou '.$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]['pais'].'</p>';
+
+                        array_push($_SESSION['paises_jogador'],$_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        unset($_SESSION['paises_pc'][$possibilidade_ataque[$i]['pais_ataque_id']]);
+                        $_SESSION['paises_pc'] = array_values($_SESSION['paises_pc']);
+                        $_SESSION['paises_jogador'][key(array_slice($_SESSION['paises_jogador'], -1, 1, TRUE))]['exercito'] = 1;
+                        break;
+                    }
+                }
+                $contador++;
+            }
+            break;
+
+        }
+    }
+
 
