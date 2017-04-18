@@ -71,6 +71,9 @@
             <?= $_SESSION['mensagens'] ?>
         </p>
     </div>
+    <pre id="dump">
+
+    </pre>
 </div>
 
 <?php require_once ('../static/shared/footer.php'); ?>

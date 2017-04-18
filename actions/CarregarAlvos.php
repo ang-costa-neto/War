@@ -6,13 +6,14 @@
 
     $pais = $_POST['pais'];
 
-    $tamanho_pais_jogador_alvo = sizeof($_SESSION['paises_jogador'][$pais]['fronteira']);
+    $tamanho_pais_alvo_fronteira = sizeof($_SESSION['paises_jogador'][$pais]['fronteira']);
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
 
     $option = array();
 
+    //Verifica se o pais faz fronteira com um pais inimigo
     for($i = 0; $i < $tamanho_pais_pc; $i++){
-        for($j = 0; $j < $tamanho_pais_jogador_alvo; $j++){
+        for($j = 0; $j < $tamanho_pais_alvo_fronteira; $j++){
            if( $_SESSION['paises_pc'][$i]['pais'] == $_SESSION['paises_jogador'][$pais]['fronteira'][$j] ){
                 array_push($option, $_SESSION['paises_jogador'][$pais]['fronteira'][$j]);
            }

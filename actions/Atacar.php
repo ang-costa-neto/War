@@ -14,6 +14,7 @@
 
     $exercito = $_SESSION['paises_jogador'][$pais_jogador]['exercito'];
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
+    $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
     $alvo = '';
 
     for($i = 0; $i < $tamanho_pais_pc; $i++){
@@ -74,4 +75,41 @@
      * Partida do computador
      */
 
+    //Recalcula o tamanho do array
+    $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
+    $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
+
+    $possibilidade_ataque = array();
+    $contador = 0;
+
+    for($i = 0; $i < $tamanho_pais_pc; $i++){
+        $tamanho_pais_pc_fronteira = sizeof($_SESSION['paises_pc'][$i]['fronteira']);
+        for($j = 0; $j < $tamanho_pais_jogador; $j++){
+            for($k = 0; $k < $tamanho_pais_pc_fronteira; $k++) {
+                if($_SESSION['paises_pc'][$i]['fronteira'][$k] == $_SESSION['paises_jogador'][$j]['pais']){
+                    if ($_SESSION['paises_pc'][$i]['exercito'] > $_SESSION['paises_jogador'][$j]['exercito']){
+
+                        $possibilidade_ataque[$contador]['pais_ataque'] = $_SESSION['paises_pc'][$i]['pais'];
+
+                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_pc'][$i]['exercito'];
+
+                        $possibilidade_ataque[$contador]['pais_alvo'] = $_SESSION['paises_jogador'][$j]['pais'];
+
+                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
+
+                    }else if($_SESSION['paises_pc'][$i]['exercito'] == $_SESSION['paises_jogador'][$j]['exercito']){
+
+                        $possibilidade_ataque[$contador]['pais_ataque'] = $_SESSION['paises_pc'][$i]['pais'];
+
+                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_pc'][$i]['exercito'];
+
+                        $possibilidade_ataque[$contador]['pais_alvo'] = $_SESSION['paises_jogador'][$j]['pais'];
+
+                        $possibilidade_ataque[$contador]['pais_ataque_exercito'] = $_SESSION['paises_jogador'][$j]['exercito'];
+                    }
+                    $contador++;
+                }
+            }
+        }
+    }
 
