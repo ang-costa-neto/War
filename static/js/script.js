@@ -35,6 +35,6 @@ $('#atacar').click(function(){
     var pais_pc = $('#pais_alvo').val();
 
     $.post('http://localhost/chuvawar/actions/Atacar.php',{'pais_jogador':pais_jogador,'pais_pc':pais_pc},function(data){
-        console.log(data);
+        location.reload();
     });
 });

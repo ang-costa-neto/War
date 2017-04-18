@@ -10,8 +10,6 @@
     $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
 
-    var_dump(sizeof($_SESSION['paises_jogador']));
-    var_dump(sizeof($_SESSION['paises_pc']));
 
 ?>
 <div class="row">
@@ -68,9 +66,10 @@
 
     </div>
     <div class="col-md-6">
-        <pre>
-            <?= var_dump($_SESSION) ?>
-        </pre>
+        <h2>Historico</h2>
+        <p>
+            <?= $_SESSION['mensagens'] ?>
+        </p>
     </div>
 </div>
 

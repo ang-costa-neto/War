@@ -28,10 +28,12 @@ class Configuracao
                 session_destroy();
                 session_start();
                 $_SESSION['usuario'] = $this->name;
+                $_SESSION['mensagens'] = '';
                 return 1;
             }
         }else{
             $_SESSION['usuario'] = $this->name;
+            $_SESSION['mensagens'] = '';
             return 1;
         }
     }
