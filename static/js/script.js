@@ -1,5 +1,6 @@
 $(function(){
     $('.modal').modal();
+    //Carrega os paises alvos quando é selecionado um pais
     $('#paises_jogador').on('change',function(){
         var pais_selecionado = $('#paises_jogador').val();
         if(pais_selecionado !== ''){
@@ -9,6 +10,7 @@ $(function(){
                $('.selectpicker').selectpicker({});
                $('#pais_alvo').on('change',function(){
                    var pais_alvo = $('#pais_alvo').val();
+                   //Habilita o botão quando o pais é selecionado
                    if(pais_alvo !== ''){
                         $('#atacar').removeClass('disabled');
                    }else{
@@ -22,7 +24,7 @@ $(function(){
         }
     });
 });
-
+//Adiciona a função ataque no botão de atacar
 $('#atacar').click(function(){
     var pais_jogador = $('#paises_jogador').val();
     var pais_pc = $('#pais_alvo').val();
