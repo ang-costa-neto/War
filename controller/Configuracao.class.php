@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: angel
- * Date: 15/04/2017
- * Time: 19:54
- */
 
 namespace controller;
 
-
+/*
+ * Classe de configuração do jogo
+ * @param usuario nome do usuario para o inicio da sessão
+ */
 class Configuracao
 {
 

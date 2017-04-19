@@ -10,6 +10,11 @@ namespace controller;
 
 use controller\Configuracao;
 
+/*
+ * Classe de jogo ações no jogo
+ * @param usuario nome do usuario para dar continuidade ao jogo
+ */
+
 class Jogo extends Configuracao
 {
 

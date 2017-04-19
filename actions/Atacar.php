@@ -27,17 +27,22 @@
      * Partida do jogador
      */
 
+    //Pode atacar caso o exercito seja maior que 0
     if($exercito > 0){
+        //Mostra de quem é vez da partidada
         $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': <b>Rodada do Jogador</b></p>';
 
         while($contador < $exercito){
+            //Roda o dado
             $dado = $jogo->rodaDado();
             $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': Valor no dado foi '.$dado.'</p>';
 
             $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': '.$_SESSION['paises_jogador'][$pais_jogador]['pais']
                                     .' ataca '.$_SESSION['paises_pc'][$alvo]['pais'].'</p>';
 
+            //Se o valor do dado for maior que 5, vence a batalha e registra no historico
             if($dado > 5){
+
                 $_SESSION['paises_pc'][$alvo]['exercito']--;
 
                 $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_pc'][$alvo]['pais']
@@ -57,6 +62,7 @@
                     break;
                 }
             }else{
+                //Se o dado for menor ou igual a 5 perde a batalha e registra no historico
                 $_SESSION['paises_jogador'][$pais_jogador]['exercito']--;
 
                 $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': O '.$_SESSION['paises_jogador'][$pais_jogador]['pais']
@@ -93,6 +99,7 @@
     $possibilidade_ataque = array();
     $contador = 0;
 
+    //Mostra a vem de que é
     $_SESSION['mensagens'] .= '<p>'.date("d/m/Y H:i:s").': <b>Rodada do Computador</b></p>';
 
     //Preenche um array de possibilidade de ataque
@@ -129,7 +136,7 @@
     $tamanho_possibilidade_ataque = sizeof($possibilidade_ataque);
     $contador = 0;
 
-    //Analisa as possibilidades de ataque
+    //Analisa as possibilidades de ataque e realiza o ataque
     for($i = 0; $i < $tamanho_possibilidade_ataque; $i++){
         if($possibilidade_ataque[$i]['pais_ataque_exercito'] > ($possibilidade_ataque[$i]['pais_alvo_exercito']/2)){
 

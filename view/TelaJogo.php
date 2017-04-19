@@ -74,6 +74,7 @@
 
 <?php
     if($tamanho_pais_jogador == 0){
+        // Se o jogador perde, abre o modal dizendo que perdeu
     ?>
         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="true">
             <div class="modal-dialog" role="document">
@@ -92,7 +93,7 @@
         </div>
 <?php
     }else if($tamanho_pais_pc == 0){
-        echo 'ok';
+        // Se o jogador vence, abre o modal dizendo que vence
 ?>
         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="true">
             <div class="modal-dialog" role="document">

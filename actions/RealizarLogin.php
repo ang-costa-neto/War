@@ -11,7 +11,7 @@
     $login = new \controller\Configuracao($nome);
     $jogo = new \controller\Jogo($nome);
 
-    ;
+    //Realiza o login
 
     if($login->iniciarSessao() == CRIA_UMA_NOVA_SESSAO){
         $jogo->iniciarJogo();
