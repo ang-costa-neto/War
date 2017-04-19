@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>ChuWar</title>
-    <link rel="stylesheet" href="<?= $ROOT ?>static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= $ROOT ?>static/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-select.min.css">
 </head>
 <body>
 <div class="container">
