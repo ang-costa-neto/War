@@ -1,6 +1,6 @@
 <?php
     define( 'SERVER', 'http://'.$_SERVER['SERVER_NAME'] );
-    define( 'DIRECTORY_ROOT', '/chuvawar/' );
+    define( 'DIRECTORY_ROOT', '/ChuWar/' );
 ?>
 
 <!DOCTYPE html>

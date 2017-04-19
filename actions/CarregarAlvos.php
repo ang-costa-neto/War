@@ -2,8 +2,6 @@
 
     session_start();
 
-    const SEM_PAISES_ATACAR = 0;
-
     $pais = $_POST['pais'];
 
     $tamanho_pais_alvo_fronteira = sizeof($_SESSION['paises_jogador'][$pais]['fronteira']);
@@ -31,7 +29,9 @@
                 <option value="<?= $option[$i] ?>"><?= $option[$i] ?></option>
             <?php } ?>
         </select>
-<?php }else{
-        return SEM_PAISES_ATACAR;
+<?php
+
+    }else{
+        echo '<strong>Os paises na fronteira estão em seu time</strong>';
     }
 

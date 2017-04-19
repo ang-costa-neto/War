@@ -5,7 +5,7 @@
 
     session_start();
 
-    $jogo = new \Jogo\Jogo($_SESSION['usuario']);
+    $jogo = new \controller\Jogo($_SESSION['usuario']);
 
     $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
@@ -73,4 +73,46 @@
     </div>
 </div>
 
-<?php require_once ('../static/shared/footer.php'); ?>
+<?php
+    if($tamanho_pais_jogador == 0){
+    ?>
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Você perdeu</h4>
+                    </div>
+                    <div class="modal-body">
+                        O computador Venceu
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+    }else if($tamanho_pais_pc == 0){
+        echo 'ok';
+?>
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="modal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Parabens</h4>
+                    </div>
+                    <div class="modal-body">
+                        Você venceu
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php
+    }
+
+    require_once ('../static/shared/footer.php');
+
+?>

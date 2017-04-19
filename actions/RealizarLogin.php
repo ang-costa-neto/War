@@ -8,8 +8,8 @@
 
     $nome = $_POST['nome'];
 
-    $login = new \Configuracao\Configuracao($nome);
-    $jogo = new \Jogo\Jogo($nome);
+    $login = new \controller\Configuracao($nome);
+    $jogo = new \controller\Jogo($nome);
 
     ;
 

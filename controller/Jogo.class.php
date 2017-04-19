@@ -6,9 +6,9 @@
  * Time: 20:04
  */
 
-namespace Jogo;
+namespace controller;
 
-use Configuracao\Configuracao;
+use controller\Configuracao;
 
 class Jogo extends Configuracao
 {

@@ -6,7 +6,7 @@
  * Time: 19:54
  */
 
-namespace Configuracao;
+namespace controller;
 
 
 class Configuracao
