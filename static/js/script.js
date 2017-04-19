@@ -3,7 +3,7 @@ $(function(){
     $('#paises_jogador').on('change',function(){
         var pais_selecionado = $('#paises_jogador').val();
         if(pais_selecionado !== ''){
-           $.post('http://localhost/ChuWar/actions/CarregarAlvos.php',{'pais':pais_selecionado},function(data){
+           $.post('../../actions/CarregarAlvos.php',{'pais':pais_selecionado},function(data){
                $('#select_pais_alvo').empty();
                $('#select_pais_alvo').html(data);
                $('.selectpicker').selectpicker({});
@@ -27,7 +27,7 @@ $('#atacar').click(function(){
     var pais_jogador = $('#paises_jogador').val();
     var pais_pc = $('#pais_alvo').val();
 
-    $.post('http://localhost/ChuWar/actions/Atacar.php',{'pais_jogador':pais_jogador,'pais_pc':pais_pc},function(data){
+    $.post('../../actions/Atacar.php',{'pais_jogador':pais_jogador,'pais_pc':pais_pc},function(data){
         location.reload();
     });
 });

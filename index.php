@@ -1,4 +1,10 @@
-<?php require_once ('static/shared/header.php'); ?>
+<?php
+    //Defini o nivel do arquivo na aplicação
+
+    $ROOT = './';
+
+    require_once ('static/shared/header.php');
+?>
 
     <div class="col-md-6">
         <form method="POST" action="actions/RealizarLogin.php">

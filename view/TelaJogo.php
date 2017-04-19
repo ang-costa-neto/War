@@ -1,5 +1,9 @@
 <?php
+
+    $ROOT = '../';
+
     require_once ('../static/shared/header.php');
+
     require_once ('../controller/Configuracao.class.php');
     require_once ('../controller/Jogo.class.php');
 
