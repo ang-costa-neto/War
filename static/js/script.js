@@ -1,6 +1,6 @@
 $(function(){
+    $('.modal').modal();
     $('#paises_jogador').on('change',function(){
-        alert(document.URL);
         var pais_selecionado = $('#paises_jogador').val();
         if(pais_selecionado !== ''){
            $.post('http://localhost/ChuWar/actions/CarregarAlvos.php',{'pais':pais_selecionado},function(data){

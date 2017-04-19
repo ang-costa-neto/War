@@ -10,7 +10,6 @@
     $tamanho_pais_jogador = sizeof($_SESSION['paises_jogador']);
     $tamanho_pais_pc = sizeof($_SESSION['paises_pc']);
 
-
 ?>
 <div class="row">
     <div class="col-md-6">
@@ -76,10 +75,10 @@
 <?php
     if($tamanho_pais_jogador == 0){
     ?>
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="modal">
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content panel-danger">
+                    <div class="modal-header panel-heading">
                         <h4 class="modal-title" id="myModalLabel">Você perdeu</h4>
                     </div>
                     <div class="modal-body">
@@ -95,10 +94,10 @@
     }else if($tamanho_pais_pc == 0){
         echo 'ok';
 ?>
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="modal">
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" data-show="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content panel-primary">
+                    <div class="modal-header panel-heading">
                         <h4 class="modal-title" id="myModalLabel">Parabens</h4>
                     </div>
                     <div class="modal-body">
