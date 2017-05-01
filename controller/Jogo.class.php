@@ -41,6 +41,12 @@ class Jogo extends Configuracao
 
     }
 
+    /*
+     * @param $id_pais recebe o pais selecionado
+     * @param $id_pais_alvo recebe o pais alvo
+     * @param $jogador recebe o jogador da rodada
+     * @param $codigo_mensagem recebe o codigo da mensagem
+     */
     public function mensagens($id_pais="",$id_pais_alvo="",$jogador,$dado="",$codigo_mensagem){
 
         $inimigo = ($jogador == 'paises_jogador') ? 'paises_pc' : 'paises_jogador';
@@ -72,11 +78,17 @@ class Jogo extends Configuracao
         }
     }
 
+    /*
+     * @param $id_pais recebe o pais selecionado
+     * @param $id_pais_alvo recebe o pais alvo
+     * @param $jogador recebe o jogador da rodada
+     */
     public function atacar($id_pais,$id_pais_alvo,$jogador){
 
         $contador = 0;
-
+        //Define o array que será utilizado como jogador
         $tipo_jogador = ($jogador == strtolower('jogador')) ? 'paises_jogador' : 'paises_pc';
+        //Define o array que será utilizado como inimigo
         $inimigo = ($jogador == strtolower('jogador')) ? 'paises_pc' : 'paises_jogador';
 
         $this->mensagens(null,null,$jogador,null,self::MENSAGEM_INICIO_RODADA);
@@ -105,6 +117,7 @@ class Jogo extends Configuracao
             $inimigo_jogador = $tipo_jogador;
             $pais = $id_pais;
 
+            //Altera o valor das variaveis para que quando o dado for menor que 5 o jogador da rodada sofre dano
             if($valorDado < 5){
 
                 $pais_recebendo_dano = $id_pais;
@@ -136,6 +149,9 @@ class Jogo extends Configuracao
         }
     }
 
+    /*
+     * @param $jogador recebe o jogador que ira receber os exercitos
+     */
     public function distribuiExercito($jogador){
 
         $tipo_jogador = ($jogador == strtolower('jogador')) ? 'paises_jogador' : 'paises_pc';
