@@ -1,4 +1,5 @@
 $(function(){
+    //Inicializa o modal
     $('.modal').modal();
     //Carrega os paises alvos quando é selecionado um pais
     $('#paises_jogador').on('change',function(){
@@ -29,7 +30,7 @@ $('#atacar').click(function(){
     var pais_jogador = $('#paises_jogador').val();
     var pais_pc = $('#pais_alvo').val();
 
-    $.post('/actions/Atacar.php',{'pais_jogador':pais_jogador,'pais_pc':pais_pc},function(data){
+    $.post('/actions/Atacar.php',{'pais_jogador':pais_jogador,'pais_pc':pais_pc},function(){
         location.reload();
     });
 });

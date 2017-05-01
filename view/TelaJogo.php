@@ -4,6 +4,10 @@
     require_once ('../controller/Configuracao.class.php');
     require_once ('../controller/Jogo.class.php');
 
+    ini_set('xdebug.var_display_max_depth', 5);
+    ini_set('xdebug.var_display_max_children', 256);
+    ini_set('xdebug.var_display_max_data', 1024);
+
     session_start();
 
     $jogo = new \controller\Jogo($_SESSION['usuario']);
@@ -33,7 +37,7 @@
     <div class="col-md-6">
         <table class="table table-striped">
             <tr class="danger">
-                <th colspan="2">PC</th>
+                <th colspan="2">Computador</th>
             </tr>
             <tr>
                 <th>Pais</th>
@@ -57,7 +61,7 @@
             <?php } ?>
         </select>
         <br><br>
-        <button id="atacar" class="btn btn-danger disabled">Atacar</button>
+        <button id="atacar" class="btn btn-danger disabled" >Atacar</button>
     </div>
     <div class="col-md-3">
         <div id="select_pais_alvo">
